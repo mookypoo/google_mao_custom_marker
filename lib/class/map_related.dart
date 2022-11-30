@@ -36,38 +36,38 @@ class SampleData {
   static const List<Store> stores = [
     Store(
       id: "1",
-      name: "Best Coffee In The World",
+      name: "무신사 스탠다드 슬랙스 랩 성수",
       latLng: LocationClass(latitude: 37.5258975, longitude: 126.9284261),
       type: "Cafe",
     ),
     Store(
       id: "2",
-      name: "Free Your Mind",
-      latLng: LocationClass(latitude: 37.5258975, longitude: 126.9284261),
+      name: "키뮤스튜디오",
+      latLng: LocationClass(latitude: 37.5152131, longitude: 126.9408624),
       type: "Exhibition",
     ),
     Store(
       id: "3",
       name: "Stussy x Nike: the Collab",
-      latLng: LocationClass(latitude: 37.5258975, longitude: 126.9284261),
+      latLng: LocationClass(latitude: 37.5278165, longitude: 126.9291976),
       type: "Store",
     ),
     Store(
       id: "4",
-      name: "Coffee is On Me!",
-      latLng: LocationClass(latitude: 37.5258975, longitude: 126.9284261),
+      name: "Summer Bathcation",
+      latLng: LocationClass(latitude: 37.5212731, longitude: 126.9323344),
       type: "Cafe",
     ),
     Store(
       id: "5",
-      name: "Your Local Artists",
-      latLng: LocationClass(latitude: 37.5258975, longitude: 126.9284261),
+      name: "RANG PA RANG PA",
+      latLng: LocationClass(latitude: 37.5186349, longitude: 126.9266125),
       type: "Exhibition",
     ),
     Store(
       id: "6",
-      name: "Anime Shop",
-      latLng: LocationClass(latitude: 37.5258975, longitude: 126.9284261),
+      name: "시몬스 그로서리 스토어 청담",
+      latLng: LocationClass(latitude: 37.5254157, longitude: 126.9215157),
       type: "Store",
     ),
   ];
