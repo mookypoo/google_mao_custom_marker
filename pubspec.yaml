@@ -67,6 +67,13 @@ flutter:
      - assets/bubble_resize.9.png
      - assets/bubble_resize_longer.9.png
      - assets/bubble.9.png
+     - assets/store_w340.9.png
+     - assets/store_w380.9.png
+     - assets/store_w300.9.png
+     - assets/store_380.9.png
+     - assets/store_360.9.png
+     - assets/store_340.9.png
+     - assets/marker_65.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

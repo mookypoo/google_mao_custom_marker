@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:google_map_custom_icon/map_service.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'bubble_with_marker.dart';
 import 'class/custom_marker.dart';
 import 'class/map_related.dart';
 import 'nine_patch.dart';
@@ -9,11 +10,13 @@ import 'nine_patch.dart';
 class MapProvider with ChangeNotifier {
   final MapService _mapService = MapService();
   final NinePatch _ninePatch = NinePatch();
+  final BubbleWithMarker _bubbleWithMarker = BubbleWithMarker();
 
   MapProvider(){
     Future(() async {
       //await this.init();
-      await this.drawNine();
+      //await this.drawNine();
+      await this.bubbleMarker();
     });
   }
 
@@ -39,14 +42,26 @@ class MapProvider with ChangeNotifier {
   }
 
   Future<void> drawNine() async {
-    int index = 1;
     await Future.forEach(this.stores, (Store store) async {
-      final Uint8List _bytes = await this._ninePatch.ninePatchBubble(storeName: store.name);
+      // if (store.name.contains("RANG")) {
+      //   final Uint8List _bytes = await this._ninePatch.ninePatchBubbleOriginal(storeName: store.name);
+      //   final BitmapDescriptor _icon = BitmapDescriptor.fromBytes(_bytes);
+      //   this._markers.add(CustomMarker(icon: _icon, store: store));
+      //   return;
+      // }
+      final Uint8List _bytes = await this._ninePatch.marker(65.0);
+      //final Uint8List _bytes = await this._ninePatch.ninePatchBubble360(storeName: store.name);
       final BitmapDescriptor _icon = BitmapDescriptor.fromBytes(_bytes);
-      this._markers.add(CustomMarker(icon: _icon, store: store));
-      print(index);
-      index += 1;
-      this.notifyListeners();
+      this._markers.add(CustomMarker(icon: _icon, store: store, hasBubble: true));
+    });
+    this.notifyListeners();
+  }
+
+  Future<void> bubbleMarker() async {
+    await Future.forEach(this.stores, (Store store) async {
+      final Uint8List _bytes = await this._bubbleWithMarker.bubble360WithMarker(storeName: store.name, circleWidth: 65.0);
+      final BitmapDescriptor _icon = BitmapDescriptor.fromBytes(_bytes);
+      this._markers.add(CustomMarker(icon: _icon, store: store, hasBubble: true));
     });
     this.notifyListeners();
   }
