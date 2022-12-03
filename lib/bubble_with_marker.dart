@@ -10,8 +10,10 @@ class BubbleWithMarker {
     final ui.Canvas _canvas = ui.Canvas(_pictureRecorder);
     final TextPainter _textPainter = TextPainter(textDirection: TextDirection.ltr, ellipsis: "...",);
     _textPainter.text = TextSpan(text: storeName, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 38.8, overflow: TextOverflow.ellipsis));
+    _textPainter.layout();
+    print("$storeName width: ${_textPainter.width}, boundary: ${_textPainter.getPositionForOffset(Offset(360.0, 0.0))}");
     _textPainter.layout(maxWidth: 360.0);
-
+    //storeName.substring(start)
     final ByteData _data = await rootBundle.load("assets/store_360.9.png");
     final ui.Codec _codec = await ui.instantiateImageCodec(_data.buffer.asUint8List());
     final ui.FrameInfo _fi = await _codec.getNextFrame();
@@ -28,7 +30,6 @@ class BubbleWithMarker {
     _textPainter.paint(_canvas, const Offset(_leftMargin, 49.0));
 
     final ui.Image _circle = await this._circle(65.0);
-    print("marker height ${_circle.height}");
     _canvas.drawImage(_circle, Offset(40.0, _bubbleHeight - 18.0), Paint());
 
     final ui.Image _iamge = await _pictureRecorder.endRecording().toImage(_imageWidth.toInt(),( _bubbleHeight + circleWidth).toInt());
