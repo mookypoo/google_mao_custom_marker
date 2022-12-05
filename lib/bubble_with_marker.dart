@@ -11,9 +11,14 @@ class BubbleWithMarker {
     final TextPainter _textPainter = TextPainter(textDirection: TextDirection.ltr, ellipsis: "...",);
     _textPainter.text = TextSpan(text: storeName, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 38.8, overflow: TextOverflow.ellipsis));
     _textPainter.layout();
-    print("$storeName width: ${_textPainter.width}, boundary: ${_textPainter.getPositionForOffset(Offset(360.0, 0.0))}");
+    final TextPosition _position = _textPainter.getPositionForOffset(Offset(360.0, 0.0));
+    if (_position.affinity == TextAffinity.downstream) {
+      _textPainter.text = TextSpan(text: ("${storeName.substring(0, _position.offset - 2)}..."), style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 38.8, overflow: TextOverflow.ellipsis));
+    }
+    //print("$storeName width: ${_textPainter.width}, boundary: ${_position.offset}, ${_textPainter.text!.toPlainText()[_position.offset - 1]}");
+    /// if not wrapped - textaffinity.upstream
+    /// if overflow - .downstream
     _textPainter.layout(maxWidth: 360.0);
-    //storeName.substring(start)
     final ByteData _data = await rootBundle.load("assets/store_360.9.png");
     final ui.Codec _codec = await ui.instantiateImageCodec(_data.buffer.asUint8List());
     final ui.FrameInfo _fi = await _codec.getNextFrame();
