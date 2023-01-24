@@ -7,6 +7,7 @@ import 'class/map_related.dart';
 
 class MapService {
   /// to use your images as markers
+
   Future<Uint8List> getBytesFromAsset({required String path, required int width}) async {
     final ByteData _data = await rootBundle.load(path);
     final ui.Codec _codec = await ui.instantiateImageCodec(_data.buffer.asUint8List(), targetWidth: width);
@@ -69,7 +70,7 @@ class MapService {
     return _list;
   }
 
-  Future<ui.Image> locationBubble({required String name, required double width, required double height, required bool isSimple, required List<Store> stores}) async {
+  Future<ui.Image> locationBubble({required String name, required double width, required double height, required bool isSimple, required List<House> stores}) async {
     final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
     final Canvas _canvas = Canvas(pictureRecorder);
     final TextPainter textPainter = TextPainter(textDirection: TextDirection.ltr, maxLines: isSimple ? 1 : 1 + stores.length, ellipsis: "...");
@@ -97,8 +98,8 @@ class MapService {
       return "$s\n";
     }
 
-    TextSpan _text(Store store) => TextSpan(
-      text: _subString("${store.type} - ${store.name}"),
+    TextSpan _text(House store) => TextSpan(
+      text: _subString("${store.shortDescription}"),
       style: const TextStyle(fontSize: 40.0, fontWeight: FontWeight.w500, color: Colors.black, overflow: TextOverflow.ellipsis, height: 1.25,),
     );
 
@@ -125,7 +126,7 @@ class MapService {
     return _image;
   }
 
-  Future<Uint8List> getSelectedMarkerSimple({required double iconWidth, required List<Store> stores}) async {
+  Future<Uint8List> getSelectedMarkerSimple({required double iconWidth, required List<House> stores}) async {
     final ui.PictureRecorder _pictureRecorder = ui.PictureRecorder();
     final ui.Canvas _canvas = ui.Canvas(_pictureRecorder);
 
@@ -148,7 +149,7 @@ class MapService {
     return _list;
   }
 
-  Future<Uint8List> getSelectedMarkerDetail({required List<Store> stores, required double iconWidth}) async {
+  Future<Uint8List> getSelectedMarkerDetail({required List<House> stores, required double iconWidth}) async {
     final ui.PictureRecorder _pictureRecorder = ui.PictureRecorder();
     final ui.Canvas _canvas = ui.Canvas(_pictureRecorder);
 
